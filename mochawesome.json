@@ -5,9 +5,9 @@
     "passes": 5,
     "pending": 0,
     "failures": 0,
-    "start": "2025-07-25T15:22:15.314Z",
-    "end": "2025-07-25T15:22:15.368Z",
-    "duration": 54,
+    "start": "2025-07-25T18:11:41.512Z",
+    "end": "2025-07-25T18:11:41.568Z",
+    "duration": 56,
     "testsRegistered": 5,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "e8186431-875c-40dd-89b6-fc548ba66a52",
+      "uuid": "bfa67631-327d-4a7e-b05e-8bf79b89405c",
       "title": "",
       "fullFile": "/home/runner/work/testApi/testApi/test/login.test.js",
       "file": "/test/login.test.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "03104845-e89c-4101-8bd1-0e4307c6164e",
+          "uuid": "a65a2ce9-ed27-4480-9d10-b88f203db57e",
           "title": "Login",
           "fullFile": "/home/runner/work/testApi/testApi/test/login.test.js",
           "file": "/test/login.test.js",
@@ -36,7 +36,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "067eaa57-62f6-40c0-8ec1-391c7555cd76",
+              "uuid": "03bdd625-a0ef-4f31-89e8-241dfdacf135",
               "title": "POST /api/login",
               "fullFile": "/home/runner/work/testApi/testApi/test/login.test.js",
               "file": "/test/login.test.js",
@@ -47,7 +47,7 @@
                   "title": "ao usar credenciais válidas com um token em string, deve retornar 200 e fazer login com sucesso",
                   "fullTitle": "Login POST /api/login ao usar credenciais válidas com um token em string, deve retornar 200 e fazer login com sucesso",
                   "timedOut": false,
-                  "duration": 27,
+                  "duration": 30,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -56,8 +56,8 @@
                   "context": null,
                   "code": "const response = await request('http://localhost:3001')\n  .post('/api/login')\n  .set('Content-Type', 'application/json')\n  .send({\n    'username': 'marcelo.salmeron',\n    'password': '123456'\n  })\nexpect(response.status).to.equal(200);\nexpect(response.body.token).to.be.a('string');",
                   "err": {},
-                  "uuid": "8c3a3044-e95b-4a20-975c-aa0c9cc7c9fd",
-                  "parentUUID": "067eaa57-62f6-40c0-8ec1-391c7555cd76",
+                  "uuid": "4eca4fca-f3a3-44a3-9ab9-537bb73945b1",
+                  "parentUUID": "03bdd625-a0ef-4f31-89e8-241dfdacf135",
                   "isHook": false,
                   "skipped": false
                 },
@@ -65,7 +65,7 @@
                   "title": "ao usar credenciais inválidas com um token em string, deve retornar 401 ou 423 se bloqueado",
                   "fullTitle": "Login POST /api/login ao usar credenciais inválidas com um token em string, deve retornar 401 ou 423 se bloqueado",
                   "timedOut": false,
-                  "duration": 5,
+                  "duration": 4,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -74,8 +74,8 @@
                   "context": null,
                   "code": "const response = await request('http://localhost:3001')\n  .post('/api/login')\n  .set('Content-Type', 'application/json')\n  .send({\n    'username': 'Administrador',\n    'password': 'senhaerrada'\n  })\nexpect([401, 423]).to.include(response.status);",
                   "err": {},
-                  "uuid": "a746445d-aa9e-481b-ad56-4523ca454a99",
-                  "parentUUID": "067eaa57-62f6-40c0-8ec1-391c7555cd76",
+                  "uuid": "fa8f8cd7-c2ec-4285-a7af-7829b332eede",
+                  "parentUUID": "03bdd625-a0ef-4f31-89e8-241dfdacf135",
                   "isHook": false,
                   "skipped": false
                 },
@@ -83,7 +83,7 @@
                   "title": "ao realizar 3 tentativas, deve retornar 423 com o bloqueio da senha",
                   "fullTitle": "Login POST /api/login ao realizar 3 tentativas, deve retornar 423 com o bloqueio da senha",
                   "timedOut": false,
-                  "duration": 10,
+                  "duration": 9,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -92,8 +92,8 @@
                   "context": null,
                   "code": "const url = 'http://localhost:3001'\nconst loginPayload = {\n  'username': 'admin',\n  'password': 'senhaerrada'\n}\nconst tentarLogin = async () => {\n  return await request(url)\n    .post('/api/login')\n    .set('Content-Type', 'application/json')\n    .send(loginPayload)\n}\nconst res1 = await tentarLogin();\nexpect([401, 423]).to.include(res1.status);\nconst res2 = await tentarLogin();\nexpect([401, 423]).to.include(res2.status);\nconst res3 = await tentarLogin();\nexpect(res3.status).to.equal(423);\nconst res4 = await tentarLogin();\nexpect(res4.status).to.equal(423);",
                   "err": {},
-                  "uuid": "9f927f15-03c8-455e-b9ed-e0930530d3fe",
-                  "parentUUID": "067eaa57-62f6-40c0-8ec1-391c7555cd76",
+                  "uuid": "38617964-a430-4d23-bb59-80b1fe5854fd",
+                  "parentUUID": "03bdd625-a0ef-4f31-89e8-241dfdacf135",
                   "isHook": false,
                   "skipped": false
                 },
@@ -110,8 +110,8 @@
                   "context": null,
                   "code": "const response = await request('http://localhost:3001')\n  .post('/api/forgot-password')\n  .set('Content-Type', 'application/json')\n  .send({\n    email: 'usuario@teste.com'\n  });\nexpect(response.status).to.equal(200);\nexpect(response.body).to.have.property('success').that.is.a('boolean');\nexpect(response.body).to.have.property('message').that.is.a('string');\nexpect(response.body.success).to.be.true;\nexpect(response.body.message).to.match(/email.*enviado/i);",
                   "err": {},
-                  "uuid": "28800da7-d5ac-4e99-9a81-1fd4c7bb04c4",
-                  "parentUUID": "067eaa57-62f6-40c0-8ec1-391c7555cd76",
+                  "uuid": "7c404fa2-1f06-4aa8-bef7-a31c27b09d0d",
+                  "parentUUID": "03bdd625-a0ef-4f31-89e8-241dfdacf135",
                   "isHook": false,
                   "skipped": false
                 },
@@ -128,24 +128,24 @@
                   "context": null,
                   "code": "const response = await request('http://localhost:3001')\n  .post('/api/forgot-password')\n  .set('Content-Type', 'application/json')\n  .send({\n    email: 'emailinvalido'\n  });\nexpect(response.status).to.equal(400);\nexpect(response.body).to.have.property('success').that.is.a('boolean');\nexpect(response.body).to.have.property('message').that.is.a('string');\nexpect(response.body.success).to.be.false;\nexpect(response.body.message).to.match(/email.*inválido/i);",
                   "err": {},
-                  "uuid": "9749801b-488a-4141-92dc-059c7e277bbd",
-                  "parentUUID": "067eaa57-62f6-40c0-8ec1-391c7555cd76",
+                  "uuid": "e7a015fc-7b4d-4baa-8ea9-98249bc3cb4c",
+                  "parentUUID": "03bdd625-a0ef-4f31-89e8-241dfdacf135",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "8c3a3044-e95b-4a20-975c-aa0c9cc7c9fd",
-                "a746445d-aa9e-481b-ad56-4523ca454a99",
-                "9f927f15-03c8-455e-b9ed-e0930530d3fe",
-                "28800da7-d5ac-4e99-9a81-1fd4c7bb04c4",
-                "9749801b-488a-4141-92dc-059c7e277bbd"
+                "4eca4fca-f3a3-44a3-9ab9-537bb73945b1",
+                "fa8f8cd7-c2ec-4285-a7af-7829b332eede",
+                "38617964-a430-4d23-bb59-80b1fe5854fd",
+                "7c404fa2-1f06-4aa8-bef7-a31c27b09d0d",
+                "e7a015fc-7b4d-4baa-8ea9-98249bc3cb4c"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 49,
+              "duration": 50,
               "root": false,
               "rootEmpty": false,
               "_timeout": 20000
