@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-07-25T15:06:45.967Z",
+    "end": "2025-07-25T15:06:46.019Z",
+    "duration": 52,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0c03a5ac-1afa-4e0f-934c-26c54dcc630e",
+      "title": "",
+      "fullFile": "/home/runner/work/testApi/testApi/test/login.test.js",
+      "file": "/test/login.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2d183cb7-4c81-4e39-911c-d860fa58be59",
+          "title": "Login",
+          "fullFile": "/home/runner/work/testApi/testApi/test/login.test.js",
+          "file": "/test/login.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "e5f71ef0-d803-4602-9c86-57288533918f",
+              "title": "POST /api/login",
+              "fullFile": "/home/runner/work/testApi/testApi/test/login.test.js",
+              "file": "/test/login.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "ao usar credenciais válidas com um token em string, deve retornar 200 e fazer login com sucesso",
+                  "fullTitle": "Login POST /api/login ao usar credenciais válidas com um token em string, deve retornar 200 e fazer login com sucesso",
+                  "timedOut": false,
+                  "duration": 27,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request('http://localhost:3001')\n  .post('/api/login')\n  .set('Content-Type', 'application/json')\n  .send({\n    'username': 'marcelo.salmeron',\n    'password': '123456'\n  })\nexpect(response.status).to.equal(200);\nexpect(response.body.token).to.be.a('string');",
+                  "err": {},
+                  "uuid": "b7be66cc-70f2-4a87-a3c6-9b30203c4804",
+                  "parentUUID": "e5f71ef0-d803-4602-9c86-57288533918f",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "ao usar credenciais inválidas com um token em string, deve retornar 401 ou 423 se bloqueado",
+                  "fullTitle": "Login POST /api/login ao usar credenciais inválidas com um token em string, deve retornar 401 ou 423 se bloqueado",
+                  "timedOut": false,
+                  "duration": 4,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request('http://localhost:3001')\n  .post('/api/login')\n  .set('Content-Type', 'application/json')\n  .send({\n    'username': 'Administrador',\n    'password': 'senhaerrada'\n  })\nexpect([401, 423]).to.include(response.status);",
+                  "err": {},
+                  "uuid": "bedc72ac-00ca-4d53-93d0-bd9c387066a8",
+                  "parentUUID": "e5f71ef0-d803-4602-9c86-57288533918f",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "ao realizar 3 tentativas, deve retornar 423 com o bloqueio da senha",
+                  "fullTitle": "Login POST /api/login ao realizar 3 tentativas, deve retornar 423 com o bloqueio da senha",
+                  "timedOut": false,
+                  "duration": 9,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const url = 'http://localhost:3001'\nconst loginPayload = {\n  'username': 'admin',\n  'password': 'senhaerrada'\n}\nconst tentarLogin = async () => {\n  return await request(url)\n    .post('/api/login')\n    .set('Content-Type', 'application/json')\n    .send(loginPayload)\n}\nconst res1 = await tentarLogin();\nexpect([401, 423]).to.include(res1.status);\nconst res2 = await tentarLogin();\nexpect([401, 423]).to.include(res2.status);\nconst res3 = await tentarLogin();\nexpect(res3.status).to.equal(423);\nconst res4 = await tentarLogin();\nexpect(res4.status).to.equal(423);",
+                  "err": {},
+                  "uuid": "758d24b3-d2d5-402f-b8b7-ff6077ba8dbe",
+                  "parentUUID": "e5f71ef0-d803-4602-9c86-57288533918f",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Esqueci minha senha - deve retornar 200 e mensagem de sucesso ao enviar e-mail válido",
+                  "fullTitle": "Login POST /api/login Esqueci minha senha - deve retornar 200 e mensagem de sucesso ao enviar e-mail válido",
+                  "timedOut": false,
+                  "duration": 3,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request('http://localhost:3001')\n  .post('/api/forgot-password')\n  .set('Content-Type', 'application/json')\n  .send({\n    email: 'usuario@teste.com'\n  });\nexpect(response.status).to.equal(200);\nexpect(response.body).to.have.property('success').that.is.a('boolean');\nexpect(response.body).to.have.property('message').that.is.a('string');\nexpect(response.body.success).to.be.true;\nexpect(response.body.message).to.match(/email.*enviado/i);",
+                  "err": {},
+                  "uuid": "be60dcb1-a1e8-4b8c-bad8-5ea997e294fa",
+                  "parentUUID": "e5f71ef0-d803-4602-9c86-57288533918f",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Esqueci minha senha - deve retornar 400 ao enviar e-mail inválido",
+                  "fullTitle": "Login POST /api/login Esqueci minha senha - deve retornar 400 ao enviar e-mail inválido",
+                  "timedOut": false,
+                  "duration": 3,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const response = await request('http://localhost:3001')\n  .post('/api/forgot-password')\n  .set('Content-Type', 'application/json')\n  .send({\n    email: 'emailinvalido'\n  });\nexpect(response.status).to.equal(400);\nexpect(response.body).to.have.property('success').that.is.a('boolean');\nexpect(response.body).to.have.property('message').that.is.a('string');\nexpect(response.body.success).to.be.false;\nexpect(response.body.message).to.match(/email.*inválido/i);",
+                  "err": {},
+                  "uuid": "8b218f52-b9a1-430d-a5ce-64ed76b83f11",
+                  "parentUUID": "e5f71ef0-d803-4602-9c86-57288533918f",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "b7be66cc-70f2-4a87-a3c6-9b30203c4804",
+                "bedc72ac-00ca-4d53-93d0-bd9c387066a8",
+                "758d24b3-d2d5-402f-b8b7-ff6077ba8dbe",
+                "be60dcb1-a1e8-4b8c-bad8-5ea997e294fa",
+                "8b218f52-b9a1-430d-a5ce-64ed76b83f11"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 46,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 20000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 20000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
